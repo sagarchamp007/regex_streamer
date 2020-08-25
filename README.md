@@ -24,7 +24,8 @@ cabal install
 ```*``` 0 or more quantifiers   
 ```+``` 1 or more quantifier   
 ```{``` Start min/max quantifier   
-```}``` End min/max quantifier   
+```}``` End min/max quantifier     
+```\d``` ```\s``` ```\w``` Character class
 
 WIthin Character Class-  
 ```^``` Negate the class, but only if the first character   
