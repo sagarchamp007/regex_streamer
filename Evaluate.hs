@@ -19,9 +19,19 @@ import           Utils
 import Control.Monad.IO.Class
 
 
---eval  = ""
---g = eval $ parse [r|abc|]
+generate n input =  case validate input of
+                    Right c_regex ->  do_generate n (eval $ parse input)
+                    Left  c_regex -> error "Invalid Regex supplied@@@@"
+  where validate str = compileM (BC.pack str) []
 
+
+do_generate 0 gen = return []
+do_generate n gen = do
+                    x  <- gen
+                    xs <- do_generate (n-1) gen
+                    return (x:xs)
+                  
+                  
 empty_monad = return ""
 
 join x y = do
@@ -78,19 +88,6 @@ do_eval str ((Possesive ast):rem_ast) = do_eval (join str poss_str) rem_ast
     where
       poss_str = (do_eval empty_monad [ast])
 
-
-
-do_generate 0 gen = return []
-do_generate n gen = do
-                    x  <- gen
-                    xs <- do_generate (n-1) gen
-                    return (x:xs)
-                  
-  
-generate n input =  case validate input of
-                    Right c_regex ->  do_generate n (eval $ parse input)
-                    Left  c_regex -> error "Invalid Regex supplied@@@@"
-  where validate str = compileM (BC.pack str) []
 
 -- gen input = do
 --   x <- (generate input)
