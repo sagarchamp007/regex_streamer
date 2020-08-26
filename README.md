@@ -5,10 +5,10 @@
 ## Installation
 
 Use the package manager [cabal] to install regex-streamer.
-1. clone the repo.
 
 ```bash
-cd  project_dir
+git clone https://github.com/sagarchamp007/regex_streamer.git
+cd regex_streamer
 cabal configure
 cabal build
 cabal install
